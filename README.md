@@ -30,7 +30,7 @@ fun SliderView(
 ) {
     // Implementation details...
 }
-Installation
+## Installation
 To use this library in your Android project, add the following dependency to your build.gradle file:
 
 groovy
