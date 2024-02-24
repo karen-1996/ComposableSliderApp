@@ -335,7 +335,7 @@ private fun ScrolledValue(
             modifier = Modifier
                 .background(
                     color = uiConfig.selectedColor,
-                    shape = RoundedCornerShape(2.dp)
+                    shape = RoundedCornerShape(uiConfig.barWidth)
                 )
                 .height(uiConfig.barHeightMax + 6.dp)
                 .width(uiConfig.barWidth * 2),

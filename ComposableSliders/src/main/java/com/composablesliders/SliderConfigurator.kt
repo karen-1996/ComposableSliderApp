@@ -138,11 +138,11 @@ sealed class SliderConfigurator(protected open val start: Float, protected open 
     ): Float = ranges.find { it.first.contains(currentValue) }?.second ?: 1f
 
     companion object {
-        internal val BarWidth = 2.dp
-        internal val BarHeightMax = 16.dp
-        internal val BarHeightMin = 8.dp
-        private val BarHeightMiddle = 18.dp
-        private const val MinAlpha = 1f
+        internal val BarWidth = 4.dp
+        internal val BarHeightMax = 20.dp
+        internal val BarHeightMin = 12.dp
+        private val BarHeightMiddle = 16.dp
+        private const val MinAlpha = 0.1f
     }
 }
 
