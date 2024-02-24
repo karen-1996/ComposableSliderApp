@@ -16,8 +16,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.composablesliderapp.ui.theme.ComposableSliderAppTheme
+import com.composablesliders.SliderConfig
 import com.composablesliders.SliderConfigurator
 import com.composablesliders.SliderView
+import com.composablesliders.api.SliderConfigApi
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,15 +31,15 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.background(Color(0xFF262626))
                     ) {
                         SliderView(
-                            sliderConfigurator = SliderConfigurator.VolumeConfig()
+                            sliderConfigurator = SliderConfigurator.TypeOverConfig()
                         )
                         Spacer(modifier = Modifier.height(2.dp))
                         SliderView(
-                            sliderConfigurator = SliderConfigurator.FadeConfig()
+                            sliderConfigurator = SliderConfigurator.TypeLinearConfig()
                         )
                         Spacer(modifier = Modifier.height(2.dp))
                         SliderView(
-                            sliderConfigurator = SliderConfigurator.SpeedConfig()
+                            sliderConfigurator = SliderConfigurator.TypeLinearAdditionalConfig()
                         )
                     }
                 }
@@ -45,6 +47,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+data class MyConfig(override val initialValue: Float = 1f, override val sliderConfig: SliderConfig) : SliderConfigApi
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {

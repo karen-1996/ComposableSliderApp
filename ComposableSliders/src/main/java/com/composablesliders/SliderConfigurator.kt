@@ -7,19 +7,17 @@ import androidx.compose.ui.unit.dp
 import com.composablesliders.SliderConfigurator.Companion.BarHeightMax
 import com.composablesliders.SliderConfigurator.Companion.BarHeightMin
 import com.composablesliders.SliderConfigurator.Companion.BarWidth
+import com.composablesliders.api.SliderConfigApi
 
 private fun linearInterpolation(x: Float, x1: Float, x2: Float, y1: Float, y2: Float): Float = y1 + (y2 - y1) / (x2 - x1) * (x - x1)
 
-sealed class SliderConfigurator(protected open val start: Float, protected open val end: Float) {
-
-    internal abstract val sliderConfig: SliderConfig
+sealed class SliderConfigurator(protected open val start: Float, protected open val end: Float): SliderConfigApi {
     internal abstract val interpolationRanges: List<Pair<ClosedFloatingPointRange<Float>, ClosedFloatingPointRange<Float>>>
-    internal abstract val initialValue: Float
 
     internal open val tickOffset: Int = 60
     internal open val additionalTickWidth: Float = 0f
 
-    data class VolumeConfig(
+    data class TypeOverConfig(
         override val initialValue: Float = 0f,
         override val start: Float = 0f,
         override val end: Float = 40f,
@@ -51,7 +49,7 @@ sealed class SliderConfigurator(protected open val start: Float, protected open 
         )
     ) : SliderConfigurator(start, end)
 
-    data class FadeConfig(
+    data class TypeLinearConfig(
         override val initialValue: Float = 0f,
         override val start: Float = 0f,
         override val end: Float = 15f,
@@ -88,7 +86,7 @@ sealed class SliderConfigurator(protected open val start: Float, protected open 
         )
     ) : SliderConfigurator(start, end)
 
-    data class SpeedConfig(
+    data class TypeLinearAdditionalConfig(
         override val initialValue: Float = 0f,
         override val start: Float = 0f,
         override val end: Float = 42f,
@@ -173,14 +171,14 @@ data class SliderUiConfig(
     val minAlphaAnim: Float,
     val isDark: Boolean = true,
     val backgroundColor: Color = Color.Transparent,
-    val highlightItemColor: Color = Color(0xFFB3B3B3),
-    val barColor: Color = Color(0xFF666666),
-    val overvalueSelectedColor: Color = Color(0xFFF84973),
-    val overvalueUnselectedColor: Color = Color(0x66F84973),
-    val labelColor: Color = Color(0xFF808080),
+    val highlightItemColor: Color = Color(0xFFB19C9C),
+    val barColor: Color = Color(0xFF424242),
+    val overvalueSelectedColor: Color = Color(0xFFF30B42),
+    val overvalueUnselectedColor: Color = Color(0x4DAC042C),
+    val labelColor: Color = Color(0xFF5E4A4A),
     val labelBackgroundColor: Color = Color(0xE6262626),
-    val selectedColor: Color = Color(0xFFFFFFFF),
-    val thumbColor: Color = Color(0xFFFFFFFF),
+    val selectedColor: Color = Color(0xFF3C6FD1),
+    val thumbColor: Color = Color(0xFF3C6FD1),
     val overvalueIndex: Int = 35,
     val step: Int = 5,
 )

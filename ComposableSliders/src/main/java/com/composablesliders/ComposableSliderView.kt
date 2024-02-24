@@ -25,13 +25,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.composablesliders.api.SliderConfigApi
 import kotlin.math.roundToInt
 
 @Preview
 @Composable
 fun SliderView(
     modifier: Modifier = Modifier,
-    sliderConfigurator: SliderConfigurator = SliderConfigurator.VolumeConfig(),
+    sliderConfigurator: SliderConfigApi = SliderConfigurator.TypeOverConfig(),
     onValueChange: (Float) -> Unit = {}
 ) {
     val initialValue: Float = sliderConfigurator.initialValue
@@ -43,7 +44,7 @@ fun SliderView(
         color = sliderConfigurator.sliderConfig.uiConfig.backgroundColor
     ) {
         when (sliderConfigurator) {
-            is SliderConfigurator.VolumeConfig -> {
+            is SliderConfigurator.TypeOverConfig -> {
                 LinearTickSlider(
                     sliderValueState = sliderValueState,
                     sliderValueTextState = sliderValueTextState,
@@ -58,13 +59,7 @@ fun SliderView(
                     })
             }
 
-            is SliderConfigurator.FadeConfig -> {
-//                TimelineSlider(
-//                    sliderValueState = sliderValueState,
-//                    sliderValueTextState = sliderValueTextState,
-//                    sliderConfigurator = sliderConfigurator,
-//                    onValueChange = onValueChange
-//                )
+            is SliderConfigurator.TypeLinearConfig -> {
                 LinearTickSlider(
                     sliderValueState,
                     sliderValueTextState,
@@ -73,7 +68,7 @@ fun SliderView(
                 )
             }
 
-            is SliderConfigurator.SpeedConfig -> {
+            is SliderConfigurator.TypeLinearAdditionalConfig -> {
                 LinearTickSlider(
                     sliderValueState,
                     sliderValueTextState,

@@ -175,7 +175,7 @@ private fun LinearTickSlider(
                     ),
                     text =
                     if (i % uiConfig.step == 0) {
-                        if (sliderConfigurator is SliderConfigurator.SpeedConfig) {
+                        if (sliderConfigurator is SliderConfigurator.TypeLinearAdditionalConfig) {
                             "${sliderConfigurator.valueCalculator(i.toFloat(), ranges).round(2)}"
                         } else {
                             "${
@@ -275,7 +275,7 @@ private fun LinearTickSlider(
             }
 
             // do it after first composition to setup haptic correctly
-            if (sliderConfigurator is SliderConfigurator.VolumeConfig) {
+            if (sliderConfigurator is SliderConfigurator.TypeOverConfig) {
                 linearTickValueState.allowHaptic = true
             }
 
@@ -322,7 +322,7 @@ private fun ScrolledValue(
                 text = "${
                     sliderConfigurator.valueCalculator(linearTickValueState.currentValue, ranges)
                         .round(
-                            if (sliderConfigurator is SliderConfigurator.SpeedConfig) 2 else 1
+                            if (sliderConfigurator is SliderConfigurator.TypeLinearAdditionalConfig) 2 else 1
                         )
                 }",
                 fontSize = 12.sp,
@@ -348,7 +348,7 @@ private fun ScrolledValue(
 fun LinearTickSlider(
     sliderValueState: MutableFloatState = mutableFloatStateOf(0f),
     sliderValueTextState: MutableState<String> = mutableStateOf(""),
-    sliderConfigurator: SliderConfigurator = SliderConfigurator.VolumeConfig(),
+    sliderConfigurator: SliderConfigurator = SliderConfigurator.TypeOverConfig(),
     onValueChange: (Float) -> Unit = {}
 ) {
     val linearTickSliderState =
