@@ -1,5 +1,6 @@
 package com.composablesliders
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.core.calculateTargetValue
 import androidx.compose.animation.splineBasedDecay
 import androidx.compose.foundation.background
@@ -28,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.pointer.pointerInput
@@ -65,6 +65,7 @@ private fun rememberSliderState(
     return state
 }
 
+@SuppressLint("ReturnFromAwaitPointerEventScope", "MultipleAwaitPointerEventScopes")
 private fun Modifier.drag(state: LinearTickSliderState, numSegments: Int, segmentWidthPx: Int) =
     pointerInput(Unit) {
         val decay = splineBasedDecay<Float>(this)

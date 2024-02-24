@@ -82,9 +82,7 @@ internal class LinearTickSliderStateImpl(
         if (range != other.range) return false
         if (intRange != other.intRange) return false
         if (animatedly != other.animatedly) return false
-        if (decayAnimationSpec != other.decayAnimationSpec) return false
-
-        return true
+        return decayAnimationSpec == other.decayAnimationSpec
     }
 
     override fun hashCode(): Int {
