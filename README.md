@@ -21,8 +21,7 @@ SliderView(
 SliderView Composable
 The SliderView composable is the main component of this library. It allows you to create a slider with a specific configuration. Here's how you can use it:
 
-kotlin
-Copy code
+
 @Composable
 fun SliderView(
     modifier: Modifier = Modifier,
@@ -35,14 +34,8 @@ Installation
 To use this library in your Android project, add the following dependency to your build.gradle file:
 
 groovy
-Copy code
 implementation "com.example:composablesliders:1.0.0"
 Make sure to replace com.example:composablesliders:1.0.0 with the actual dependency string for your library.
 
 License
 This library is licensed under the MIT License. See the LICENSE file for details.
-
-csharp
-Copy code
-
-Feel free to customize this template to add more information about your library, such as additional features, configuration options, and usage examples.
