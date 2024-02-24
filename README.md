@@ -9,15 +9,15 @@ Here is an example of how you can use the library to create different types of s
 
 ```kotlin
 SliderView(
-    sliderConfigurator = SliderConfigurator.VolumeConfig()
+    sliderConfigurator = SliderConfigurator.TypeOverConfig()
 )
 Spacer(modifier = Modifier.height(2.dp))
 SliderView(
-    sliderConfigurator = SliderConfigurator.FadeConfig()
+    sliderConfigurator = SliderConfigurator.TypeLinearConfig()
 )
 Spacer(modifier = Modifier.height(2.dp))
 SliderView(
-    sliderConfigurator = SliderConfigurator.SpeedConfig()
+    sliderConfigurator = SliderConfigurator.TypeLinearAdditionalConfig()
 )
 ```
 
