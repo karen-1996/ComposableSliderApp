@@ -29,7 +29,7 @@ The SliderView composable is the main component of this library. It allows you t
 @Composable
 fun SliderView(
     modifier: Modifier = Modifier,
-    sliderConfigurator: SliderConfigurator = SliderConfigurator.VolumeConfig(),
+    sliderConfigurator: SliderConfigurator = SliderConfigurator.TypeOverConfig(),
     onValueChange: (Float) -> Unit = {}
 ) {
     // Implementation details...
