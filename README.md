@@ -49,7 +49,13 @@ implement one of these two interfaces.
 
 Example of Custom Config
 ```kotlin
-data class MyConfig(override val initialValue: Float = 1f, override val sliderConfig: SliderConfig) : SliderConfigApi
+data class MyConfig(
+    override val initialValue: Float = 1f,
+    override val sliderConfig: SliderConfig
+) : NonOverSliderConfigApi {
+    override val tickOffset: Int = 60
+    override val additionalTickWidth: Float = 0f
+}
 ```
 
 ## SliderView Composable
