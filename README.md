@@ -50,7 +50,7 @@ data class MyConfig(override val initialValue: Float = 1f, override val sliderCo
 
 The SliderView composable is the main component of this library. It allows you to create a slider with a specific configuration. Here's how you can use it:
 
-```
+```kotlin
 @Composable
 fun SliderView(
     modifier: Modifier = Modifier,
@@ -65,7 +65,7 @@ fun SliderView(
 
 To use this library in your Android project, add the following dependency to your build.gradle file:
 
-```
+```kotlin
 implementation("io.github.karen-1996.composableviews:composablesliders:1.0.0") // take latest from Maven central
 ```
 
