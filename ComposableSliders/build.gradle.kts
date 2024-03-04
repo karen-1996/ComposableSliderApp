@@ -4,8 +4,10 @@ plugins {
     id("maven-publish")
 }
 
+private val snapshotVersion = "1.0.3-SNAPSHOT"
+private val releaseVersion = "1.0.1"
 group = "io.github.karen-1996.composableviews"
-version = "1.0.2-SNAPSHOT"
+version = snapshotVersion
 
 publishing {
     publications {
