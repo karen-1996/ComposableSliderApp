@@ -40,7 +40,8 @@ Currently we provide you 3 different existing configs to create your slider
 
 All these configs are configurable too, you can pass all the parameters you want.
 But if you want to add your own config you can do it easily. All you need to create a ```data``` class 
-and implement from ```SliderConfigApi``` interface
+and implement from ```SliderConfigApi``` interface.
+
 Example of Custom Config
 ```kotlin
 data class MyConfig(override val initialValue: Float = 1f, override val sliderConfig: SliderConfig) : SliderConfigApi
