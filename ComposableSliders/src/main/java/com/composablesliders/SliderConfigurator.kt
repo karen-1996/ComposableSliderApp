@@ -7,17 +7,16 @@ import androidx.compose.ui.unit.dp
 import com.composablesliders.SliderConfigurator.Companion.BarHeightMax
 import com.composablesliders.SliderConfigurator.Companion.BarHeightMin
 import com.composablesliders.SliderConfigurator.Companion.BarWidth
-import com.composablesliders.api.SliderConfigApi
 
 private fun linearInterpolation(x: Float, x1: Float, x2: Float, y1: Float, y2: Float): Float =
     y1 + (y2 - y1) / (x2 - x1) * (x - x1)
 
-sealed class SliderConfigurator(protected open val start: Float, protected open val end: Float) :
-    SliderConfigApi {
-    internal abstract val interpolationRanges: List<Pair<ClosedFloatingPointRange<Float>, ClosedFloatingPointRange<Float>>>
+sealed class SliderConfigurator(
+    protected open val start: Float,
+    protected open val end: Float
+) : SliderConfigApi {
 
-    internal open val tickOffset: Int = 60
-    internal open val additionalTickWidth: Float = 0f
+    internal abstract val interpolationRanges: List<Pair<ClosedFloatingPointRange<Float>, ClosedFloatingPointRange<Float>>>
 
     data class TypeOverConfig(
         override val initialValue: Float = 0f,
@@ -49,7 +48,10 @@ sealed class SliderConfigurator(protected open val start: Float, protected open 
             scrolledValue = initialValue,
             allowDrag = false
         )
-    ) : SliderConfigurator(start, end)
+    ) : SliderConfigurator(start, end) {
+        override val tickOffset: Int = 60
+        override val additionalTickWidth: Float = 0f
+    }
 
     data class TypeLinearConfig(
         override val initialValue: Float = 0f,
@@ -86,7 +88,9 @@ sealed class SliderConfigurator(protected open val start: Float, protected open 
             scrolledValue = initialValue,
             additionalTick = false
         )
-    ) : SliderConfigurator(start, end)
+    ) : SliderConfigurator(start, end) {
+        override val additionalTickWidth: Float = 0f
+    }
 
     data class TypeLinearAdditionalConfig(
         override val initialValue: Float = 0f,
@@ -127,22 +131,6 @@ sealed class SliderConfigurator(protected open val start: Float, protected open 
             additionalTick = true
         )
     ) : SliderConfigurator(start, end)
-
-    internal fun valueCalculator(
-        currentValue: Float,
-        ranges: List<Pair<ClosedFloatingPointRange<Float>, (Float) -> Float>>
-    ): Float = ranges.find { it.first.contains(currentValue) }?.second?.invoke(currentValue)
-        ?: valueCalculator(
-            currentValue.coerceIn(
-                ranges.first().first.start,
-                ranges.last().first.endInclusive
-            ), ranges
-        )
-
-    internal fun coefficientCalculator(
-        currentValue: Float,
-        ranges: List<Pair<ClosedFloatingPointRange<Float>, Float>>
-    ): Float = ranges.find { it.first.contains(currentValue) }?.second ?: 1f
 
     companion object {
         internal val BarWidth = 4.dp
@@ -190,8 +178,8 @@ data class SliderUiConfig(
     val step: Int = 5,
 )
 
-val Float.px: Float
+internal val Float.px: Float
     get() = (this * Resources.getSystem().displayMetrics.density)
 
-val Int.px: Int
+internal val Int.px: Int
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()

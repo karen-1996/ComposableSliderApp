@@ -17,9 +17,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.composablesliderapp.ui.theme.ComposableSliderAppTheme
 import com.composablesliders.SliderConfig
-import com.composablesliders.SliderConfigurator
 import com.composablesliders.SliderView
-import com.composablesliders.api.SliderConfigApi
+import com.composablesliders.NonOverSliderConfigApi
+import com.composablesliders.SliderConfigurator
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +30,36 @@ class MainActivity : ComponentActivity() {
                     Column(
                         modifier = Modifier.background(Color(0xFF262626))
                     ) {
+                        SliderView(
+                            sliderConfigurator = MyConfig(
+                                sliderConfig = SliderConfig(
+                                    listOf(
+                                        Pair(0f..20f, 0f..100f),
+                                        Pair(20f..30f, 100f..200f),
+                                        Pair(30f..40f, 200f..400f),
+                                    ).map { interpolationRange ->
+                                        Pair(interpolationRange.first) {
+                                            linearInterpolation(
+                                                it,
+                                                interpolationRange.first.start,
+                                                interpolationRange.first.endInclusive,
+                                                interpolationRange.second.start,
+                                                interpolationRange.second.endInclusive
+                                            )
+                                        }
+                                    },
+                                    listOf(
+                                        Pair(0f..20f, 0f..100f),
+                                        Pair(20f..30f, 100f..200f),
+                                        Pair(30f..40f, 200f..400f),
+                                    ).map {
+                                    Pair(it.first, 1f)
+                                }
+                                )
+                            )
+                        )
+
+                        Spacer(modifier = Modifier.height(2.dp))
                         SliderView(
                             sliderConfigurator = SliderConfigurator.TypeOverConfig()
                         )
@@ -48,7 +78,16 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-data class MyConfig(override val initialValue: Float = 1f, override val sliderConfig: SliderConfig) : SliderConfigApi
+data class MyConfig(
+    override val initialValue: Float = 1f,
+    override val sliderConfig: SliderConfig
+) : NonOverSliderConfigApi {
+    override val tickOffset: Int = 60
+    override val additionalTickWidth: Float = 0f
+}
+
+private fun linearInterpolation(x: Float, x1: Float, x2: Float, y1: Float, y2: Float): Float =
+    y1 + (y2 - y1) / (x2 - x1) * (x - x1)
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {

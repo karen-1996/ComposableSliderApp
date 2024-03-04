@@ -19,13 +19,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.composablesliders.api.SliderConfigApi
 import kotlin.math.roundToInt
 
 @Preview
@@ -44,6 +45,7 @@ fun SliderView(
         color = sliderConfigurator.sliderConfig.uiConfig.backgroundColor
     ) {
         when (sliderConfigurator) {
+            is OverSliderConfigApi,
             is SliderConfigurator.TypeOverConfig -> {
                 LinearTickSlider(
                     sliderValueState = sliderValueState,
@@ -59,6 +61,7 @@ fun SliderView(
                     })
             }
 
+            is NonOverSliderConfigApi,
             is SliderConfigurator.TypeLinearConfig -> {
                 LinearTickSlider(
                     sliderValueState,
@@ -76,8 +79,6 @@ fun SliderView(
                     onValueChange = onValueChange
                 )
             }
-
-            else -> {}
         }
     }
 }
@@ -85,7 +86,7 @@ fun SliderView(
 @Composable
 private fun SliderWithLabel(
     sliderValueTextState: State<String>,
-    sliderConfigurator: SliderConfigurator,
+    sliderConfigurator: SliderConfigApi,
     onValueChange: (Float) -> Unit,
 ) {
     val labelMinWidth: Dp = 23.9.dp
@@ -100,6 +101,10 @@ private fun SliderWithLabel(
             .height(56.dp)
             .padding(top = 16.dp)
     ) {
+        val heightOfText = remember {
+            mutableStateOf(0.dp)
+        }
+
         BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
             val offset =
                 getSliderOffset(
@@ -108,9 +113,14 @@ private fun SliderWithLabel(
                     boxWidth = maxWidth,
                     labelWidth = labelMinWidth
                 )
+            val currentDensity = LocalDensity.current
 
             SliderLabel(
-                modifier = Modifier.padding(start = offset),
+                modifier = Modifier
+                    .padding(start = offset)
+                    .onGloballyPositioned { coordinates ->
+                        heightOfText.value = with(currentDensity) { coordinates.size.height.toDp() }
+                    },
                 label = sliderValueTextState.value,
                 minWidth = labelMinWidth,
                 labelColor = if (sliderValueState.floatValue.round(2) > uiConfig.overvalueIndex) {
@@ -118,14 +128,14 @@ private fun SliderWithLabel(
                 } else {
                     uiConfig.thumbColor
                 },
-                labelBackgroundColor = uiConfig.labelBackgroundColor
+                labelBackgroundColor = uiConfig.labelBackgroundColor,
             )
         }
 
         Slider(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = uiConfig.barHeightMax - 7.dp, start = 2.dp, end = 2.dp),
+                .padding(top = uiConfig.barHeightMax - (heightOfText.value - uiConfig.barHeightMax), start = 2.dp, end = 2.dp),
             value = sliderValueState.floatValue,
             onValueChange = {
                 sliderValueState.floatValue = it
@@ -170,7 +180,7 @@ private fun SliderLabel(
 
 private fun getSliderOffset(
     value: Float,
-    sliderConfigurator: SliderConfigurator,
+    sliderConfigurator: SliderConfigApi,
     boxWidth: Dp,
     labelWidth: Dp
 ): Dp {

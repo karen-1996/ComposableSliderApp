@@ -40,7 +40,12 @@ Currently we provide you 3 different existing configs to create your slider
 
 All these configs are configurable too, you can pass all the parameters you want.
 But if you want to add your own config you can do it easily. All you need to create a ```data``` class 
-and implement from ```SliderConfigApi``` interface.
+and implement one of these interfaces
+1. ```OverSliderConfigApi```
+![alt text](https://ucc53d65f132b35cb97df6fe0108.previews.dropboxusercontent.com/p/thumb/ACP_FW7iVIVr8bcYNgWLEIIu7-j9WEOu0HkkGKJOsjpoBLl2q_YzkOS-rg7Q9y1_YRkCDuJNUOAHVdnMUrdIoaI2QQ4c2BmwYSphQbIh8Whwk4_5NyOlG1hI2aVCXWMSJy_q__SXi_Rz3bz7fgLyjaHBiy44VTQeEyjudQNaY8zmfYnigPlzAyi-Y59HJozb8k74d8aG8A8TFZPbZ1uFqVz2wS_l0cVPPedI42zbFTOqJgZHxaCmg_9y6LbU5EwJMgFUXTeQin-s7NivftZKOYQvtCTD0oPLsuXxSBpyD-0GoW9jWsK38zcw-SYG3qECcjzMIhcfdyHZOQtvVd4-riRWNfFnSS4cuTSDD3ZM6p5AugBBnNVNve0-qFYi4cpzK4E/p.png)
+
+2. ```NonOverSliderConfigApi```
+![alt text](https://ucb9696a7ce03a19aa65d72d4721.previews.dropboxusercontent.com/p/thumb/ACPHSCw-y3Vhi8TTnyFwUpY3DwwnvygEapwzmhlJ0dBIaVjtJkgyErv5A4QWmwzo2TPcXmRVFucZAw5C2wf9x5LloFtXfc1maVNkGnIXo9VoQL-1bSKLLj7zsIN0LYXlhjLChblaWWU0PiKwaqOXEv-5OP7dsNZpKmczxtit6jHijOiLMCrB3QgS_ScwsF0E3odXt9oe38e1pQwz8dpduyNhgx4ipLQ84FbFl2Y3Mp0hVNUP_3Q3PrVX8lCBcdAf8sOUrKPZNs7IZr5hdDiljk3rs2vSIW-6UF1xs6A10t3ENE_aa5VNHP0yXJMh0gKrkyQzJCQGbnNuFLisQHrb-JGgvrykpDxoXr92H5PTJMMis0hJyscV3cVhlYZexVDN_pI/p.png)
 
 Example of Custom Config
 ```kotlin

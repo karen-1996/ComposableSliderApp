@@ -106,7 +106,7 @@ private fun LinearTickSlider(
         (linearTickValueState.range.endInclusive - linearTickValueState.range.start + 1).toInt(),
     sliderValueState: MutableFloatState,
     sliderValueTextState: MutableState<String>,
-    sliderConfigurator: SliderConfigurator,
+    sliderConfigurator: SliderConfigApi,
     onValueChange: (Float) -> Unit
 ) {
     val ranges = sliderConfigurator.sliderConfig.ranges
@@ -301,7 +301,7 @@ private fun LinearTickSlider(
 @Composable
 private fun ScrolledValue(
     modifier: Modifier = Modifier,
-    sliderConfigurator: SliderConfigurator,
+    sliderConfigurator: SliderConfigApi,
     linearTickValueState: LinearTickSliderState,
     ranges: List<Pair<ClosedFloatingPointRange<Float>, (value: Float) -> Float>>
 ) {
@@ -345,10 +345,10 @@ private fun ScrolledValue(
 
 @Preview(widthDp = 720, showBackground = true)
 @Composable
-fun LinearTickSlider(
+internal fun LinearTickSlider(
     sliderValueState: MutableFloatState = mutableFloatStateOf(0f),
     sliderValueTextState: MutableState<String> = mutableStateOf(""),
-    sliderConfigurator: SliderConfigurator = SliderConfigurator.TypeOverConfig(),
+    sliderConfigurator: SliderConfigApi = SliderConfigurator.TypeOverConfig(),
     onValueChange: (Float) -> Unit = {}
 ) {
     val linearTickSliderState =
