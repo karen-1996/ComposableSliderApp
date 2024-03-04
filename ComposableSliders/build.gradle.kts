@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "io.github.karen-1996.composableviews"
-version = "1.0.1-SNAPSHOT"
+version = "1.0.2-SNAPSHOT"
 
 publishing {
     publications {
