@@ -9,9 +9,11 @@ import com.composablesliders.SliderConfigurator.Companion.BarHeightMin
 import com.composablesliders.SliderConfigurator.Companion.BarWidth
 import com.composablesliders.api.SliderConfigApi
 
-private fun linearInterpolation(x: Float, x1: Float, x2: Float, y1: Float, y2: Float): Float = y1 + (y2 - y1) / (x2 - x1) * (x - x1)
+private fun linearInterpolation(x: Float, x1: Float, x2: Float, y1: Float, y2: Float): Float =
+    y1 + (y2 - y1) / (x2 - x1) * (x - x1)
 
-sealed class SliderConfigurator(protected open val start: Float, protected open val end: Float): SliderConfigApi {
+sealed class SliderConfigurator(protected open val start: Float, protected open val end: Float) :
+    SliderConfigApi {
     internal abstract val interpolationRanges: List<Pair<ClosedFloatingPointRange<Float>, ClosedFloatingPointRange<Float>>>
 
     internal open val tickOffset: Int = 60
@@ -130,7 +132,12 @@ sealed class SliderConfigurator(protected open val start: Float, protected open 
         currentValue: Float,
         ranges: List<Pair<ClosedFloatingPointRange<Float>, (Float) -> Float>>
     ): Float = ranges.find { it.first.contains(currentValue) }?.second?.invoke(currentValue)
-        ?: valueCalculator(currentValue.coerceIn(ranges.first().first.start, ranges.last().first.endInclusive), ranges)
+        ?: valueCalculator(
+            currentValue.coerceIn(
+                ranges.first().first.start,
+                ranges.last().first.endInclusive
+            ), ranges
+        )
 
     internal fun coefficientCalculator(
         currentValue: Float,

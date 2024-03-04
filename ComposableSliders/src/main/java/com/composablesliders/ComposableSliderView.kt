@@ -76,6 +76,8 @@ fun SliderView(
                     onValueChange = onValueChange
                 )
             }
+
+            else -> {}
         }
     }
 }

@@ -52,6 +52,7 @@ android {
 dependencies {
 
     implementation(project(":ComposableSliders"))
+//    implementation("io.github.karen-1996.composableviews:composablesliders:1.0.0-SNAPSHOT")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
