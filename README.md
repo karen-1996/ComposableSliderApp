@@ -1,4 +1,4 @@
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.karen-namalyan.composableviews/composablesliderds)](https://central.sonatype.com/artifact/io.github.karen-1996.composableviews/composablesliders/)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.karen-1996.composableviews/composablesliders)](https://central.sonatype.com/artifact/io.github.karen-1996.composableviews/composablesliders/)
 
 # Composable Sliders Library for Android
 
